@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex's Web Portfolio</title>
+    <style>
+        /* Base styles and variables */
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #4FC3F7;
+            --accent-color: #FF6584;
+            --text-color: #333333;
+            --light-text: #666666;
+            --background-color: #FAFAFA;
+            --card-background: #FFFFFF;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 4rem;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding-top: 70px; /* Account for fixed header */
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        section {
+            padding: var(--spacing-xl) 0;
+            scroll-margin-top: 80px; /* Account for fixed header when scrolling */
+        }
+
+        h1, h2, h3 {
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-color);
+        }
+
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Header styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--card-background);
+            box-shadow: var(--box-shadow);
+            z-index: 1000;
+            padding: var(--spacing-md) 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: var(--spacing-lg);
+        }
+
+        nav a {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Introduction section */
+        #intro {
+            text-align: center;
+            padding: var(--spacing-xl) 0;
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: var(--spacing-lg);
+            border: 4px solid var(--primary-color);
+        }
+
+        /* Portfolio section */
+        #portfolio {
+            background-color: var(--card-background);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .project-card {
+            background-color: var(--background-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: var(--spacing-md);
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .project-description {
+            color: var(--light-text);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+        }
+
+        .project-link:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        /* Blog section */
+        #blog {
+            padding: var(--spacing-xl) 0;
+        }
+
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .blog-card {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .blog-info {
+            padding: var(--spacing-md);
+        }
+
+        .blog-title {
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .blog-excerpt {
+            color: var(--light-text);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .read-more {
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .social-link {
+            color: white;
+            font-weight: 500;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: var(--spacing-md);
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 0 var(--spacing-sm);
+            }
+            
+            .portfolio-grid,
+            .blog-posts {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Alex's Web Portfolio</div>
+            <nav>
+                <ul>
+                    <li><a href="#intro">Home</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Introduction Section -->
+        <section id="intro">
+            <div class="container intro-content">
+                <img src="https://placehold.co/150x150/6C63FF/FFFFFF?text=A" alt="Alex" class="intro-image">
+                <h1>Hi, I'm Alex</h1>
+                <p>I'm a web developer based in Codeburg, passionate about creating beautiful, functional websites that make a difference. While I may be introverted by nature, I express myself through code and design.</p>
+                <p>My journey in web development started 3 years ago when I built my first website. Since then, I've been constantly learning and improving my skills in HTML, CSS, JavaScript, and various frameworks.</p>
+                <p>When I'm not coding, you can find me reading tech blogs, exploring nature trails, or experimenting with digital art. I believe in the power of technology to connect people and solve real-world problems.</p>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio">
+            <div class="container">
+                <h2>My Portfolio</h2>
+                <p>Here are some of the projects I've worked on. Each one represents a challenge overcome and skills learned.</p>
+                
+                <div class="portfolio-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <img src="https://placehold.co/600x400/6C63FF/FFFFFF?text=E-Commerce+Site" alt="E-Commerce Project" class="project-image">
+                        <div class="project-info">
+                            <h3 class="project-title">Codeburg E-Commerce</h3>
+                            <p class="project-description">A fully responsive e-commerce website with product filtering, cart functionality, and checkout process.</p>
+                            <a href="#" class="project-link">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <img src="https://placehold.co/600x400/4FC3F7/FFFFFF?text=Weather+App" alt="Weather App" class="project-image">
+                        <div class="project-info">
+                            <h3 class="project-title">Weather Forecast App</h3>
+                            <p class="project-description">A weather application that provides forecasts based on user location with a clean, intuitive interface.</p>
+                            <a href="#" class="project-link">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <img src="https://placehold.co/600x400/FF6584/FFFFFF?text=Task+Manager" alt="Task Manager" class="project-image">
+                        <div class="project-info">
+                            <h3 class="project-title">Task Management Tool</h3>
+                            <p class="project-description">A productivity application that helps users organize tasks with drag-and-drop functionality and reminders.</p>
+                            <a href="#" class="project-link">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog">
+            <div class="container">
+                <h2>From My Blog</h2>
+                <p>I occasionally write about web development, design principles, and my learning journey.</p>
+                
+                <div class="blog-posts">
+                    <!-- Blog Post 1 -->
+                    <div class="blog-card">
+                        <img src="https://placehold.co/600x400/6C63FF/FFFFFF?text=CSS+Tips" alt="CSS Tips" class="blog-image">
+                        <div class="blog-info">
+                            <h3 class="blog-title">5 CSS Tricks That Every Developer Should Know</h3>
+                            <p class="blog-excerpt">Discover some lesser-known CSS properties and techniques that can make your styling more efficient and your websites more responsive.</p>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Blog Post 2 -->
+                    <div class="blog-card">
+                        <img src="https://placehold.co/600x400/4FC3F7/FFFFFF?text=Web+Accessibility" alt="Web Accessibility" class="blog-image">
+                        <div class="blog-info">
+                            <h3 class="blog-title">Making the Web Accessible for Everyone</h3>
+                            <p class="blog-excerpt">Learn why web accessibility matters and how you can implement basic accessibility features in your projects to reach all users.</p>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="contact-info">
+                <h2>Get In Touch</h2>
+                <p>Feel free to reach out if you'd like to collaborate or just chat about web development!</p>
+            </div>
+            
+            <div class="social-links">
+                <a href="mailto:alex@codeburg.dev" class="social-link">Email</a>
+                <a href="https://github.com/alex-codeburg" class="social-link">GitHub</a>
+                <a href="https://linkedin.com/in/alex-codeburg" class="social-link">LinkedIn</a>
+            </div>
+            
+            <p class="copyright">© 2023 Alex's Web Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
